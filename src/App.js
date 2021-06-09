@@ -42,7 +42,11 @@ export default function App() {
     const searchTerm = getSearchDrinkTerm();
     setDrinkDetailsResponse("");
     setSearchDrinkResponse("");
-    getSearchDrinkResponse(searchTerm);
+    if (searchDrinkTerm) {
+      getSearchDrinkResponse(searchTerm);
+    } else {
+      alert("Please enter a drink to search for.");
+    }
   }
   // Handles the drink link click event
   function handleDrinkClickEvent(id) {
@@ -125,11 +129,11 @@ export default function App() {
       </button>
       {!drinkDetailsResponse ? (
         <div id="searchResponse">
-          Search Response:
           {!searchDrinkResponse ? (
             ""
           ) : (
             <div>
+              Search Response:
               {Object.keys(searchDrinkResponse.drinks).map((key) => (
                 <PrintSearchResponse
                   id={searchDrinkResponse.drinks[key].idDrink}
